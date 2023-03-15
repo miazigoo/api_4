@@ -10,7 +10,7 @@ def fetch_nasa_picture_epic(img_name, img_url, nasa_api_key):
     nasa_api_params = {'api_key': nasa_api_key}
     response = requests.get(img_url, params=nasa_api_params)
     response.raise_for_status()
-    imgs_path = 'images/epic'
+    imgs_path = 'images'
     download_img(response.url, img_name, imgs_path)
 
 

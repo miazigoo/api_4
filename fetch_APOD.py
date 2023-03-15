@@ -28,7 +28,7 @@ def fetch_nasa_picture_of_the_day(nasa_api_key):
     api_object = response.json()
     img_url = api_object['url']
     filename = get_filename_and_ext(img_url)[0]
-    imgs_path = 'images/picture_of_the_day'
+    imgs_path = 'images'
     download_img(img_url, filename, imgs_path)
 
 
@@ -42,7 +42,7 @@ def fetch_nasa_pictures(count, nasa_api_key):
     response = requests.get(nasa_api_url, params=nasa_api_params)
     response.raise_for_status()
     api_objects = response.json()
-    imgs_path = 'images/APOD'
+    imgs_path = 'images'
     images_url = []
 
     for pic_link in api_objects:

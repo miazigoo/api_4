@@ -1,23 +1,47 @@
-# Download photos from NASA and SpaceX.
+# Скачивает фотографии с api NASA and SpaceX и публикует в telegram канале
 
-Creates a bitlink. If the link is a bitlink, it shows the number of clicks
 
-### How to install
+### Как установить
 
-* Download the script 
-* [Register on the website](https://api.nasa.gov) - and get a token of the format: ```ecbb0fa2d11d009c022dd9042f7bbe28f0f3bb60``` (<=the token is not valid). You can use the built-in demo token
-* In the file ```main.py``` you can substitute your api token instead of the demo
+* Скачать этот script 
+* [Зарегистрироваться на вебсайте api.nasa](https://api.nasa.gov) - и получите токен такого формата: ```ecbb0fa2d11d009c022dd9042f7bbe28f0f3bb60``` (<=этот токен не действителен). Вы можете использовать встроенный  ```demo-token```
+* В файле ```.env``` вставить  api token: ```NASA_API_KEY=YOUR_API_KEY```
+* Создать канал, бота и получить токен - [Как создать канал, бота и получить токен](https://smmplanner.com/blog/otlozhennyj-posting-v-telegram/)
+* В файле ```.env``` вставить ```TG_TOKEN=YOUR_TG_TOKEN``` , 
+```TG_CHANNEL_LOGIN=@your_channel_login```
 
-Python3 should already be installed. 
-Use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
+**Python3 уже должен быть установлен**. 
+Используйте `pip` (или `pip3`, если возникает конфликт с Python2) для установки зависимостей:
 ```
 pip install -r requirements.txt
 ```
 
-Run the file from the console:
+Запустите файл из консоли:
+
+* Для загрузки фотографий последнего запуска SpaceX:
 ```
-python main.py 
+python fetch_spacex_images.py 
 ```
+* В последнем запуске может не быть фотографий, можете загрузить фотографии по id запуска, например:
+```
+python fetch_spacex_images.py 5eb87d47ffd86e000604b38a
+```
+* Для загрузки фотографий NASA-APOD, вы можете получить **Фото-дня** используйте команду ```python fetch_APOD.py``` или загрузить **несколько** фотографий используя аргумент ```python fetch_APOD.py 5``` , где "**5**" это количество загружаемых фотографий
+
+* Для загрузки фотографий NASA-EPIC, используйте команду ```python fetch_EPIC_NASA.py``` . Будет загружено несколько фотографий хорошего качества в ```.png``` формате.
+
+После того как вы загрузите фотографии, запустите файл
+```
+python telegram-bot.py
+```
+Скрипт будет автоматически публиковать скаченные фотографии на ваш канал раз в 4 часа. Если фотографии закончатся, скрипт будет публиковать эти фотографии в рандомном порядке.
+Если хотите изменить время публикации, при запуске скрипта используйте аргумент - **число** _целое либо дробное_
+Указанное число - это количество часов
+```
+python telegram-bot.py 0.5
+```
+Так-же можете указать желаемое время публикации в файле ```.env```. Запишите туда : ```TG_PUBLISH_TIME=2``` , где _"2"_ - это колличество часов.
+Настройки в файле ```.env```, являются _приоритетнее_, чем _аргументы_.
 ### Project Goals
 
 This code was written for educational purposes as part of an online course for web developers at [dvmn.org](https://dvmn.org/).
