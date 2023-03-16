@@ -36,10 +36,7 @@ def get_epic_url_and_fetch(nasa_api_key):
 
 def main():
     load_dotenv()
-    env = os.getenv('NASA_API_KEY')
-    nasa_api_key = 'DEMO_KEY'
-    if env:
-        nasa_api_key = env
+    nasa_api_key = os.getenv('NASA_API_KEY', default='DEMO_KEY')
     get_epic_url_and_fetch(nasa_api_key)
     print(nasa_api_key)
 

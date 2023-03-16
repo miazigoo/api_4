@@ -58,10 +58,7 @@ def fetch_nasa_pictures(count, nasa_api_key):
 
 def main():
     load_dotenv()
-    env = os.getenv('NASA_API_KEY')
-    nasa_api_key = 'DEMO_KEY'
-    if env:
-        nasa_api_key = env
+    nasa_api_key = os.getenv('NASA_API_KEY', default='DEMO_KEY')
     if get_command_line_argument():
         count = get_command_line_argument()
         fetch_nasa_pictures(int(count), nasa_api_key)
@@ -71,4 +68,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    

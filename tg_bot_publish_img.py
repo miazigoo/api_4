@@ -22,8 +22,8 @@ def main():
     load_dotenv()
     img_files = [f for f in os.listdir('images')]
 
-    token = os.getenv('TG_TOKEN')
-    channel = os.getenv('TG_CHANNEL_LOGIN')
+    token = os.environ('TG_TOKEN')
+    channel = os.environ('TG_CHANNEL_LOGIN')
     bot = telegram.Bot(token=token)
 
     if not get_command_line_argument() == None:
