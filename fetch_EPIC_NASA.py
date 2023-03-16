@@ -23,7 +23,6 @@ def get_epic_url_and_fetch(nasa_api_key):
         img_response.raise_for_status()
         imgs_path = 'images'
         download_img(img_response.url, img_name, imgs_path)
-        print('success')
 
 
 def main():

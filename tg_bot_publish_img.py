@@ -25,11 +25,11 @@ def main():
     token = os.environ['TG_TOKEN']
     channel = os.environ['TG_CHANNEL_LOGIN']
     bot = telegram.Bot(token=token)
-    argument = get_command_line_argument
-    if not argument == None:
+    argument = get_command_line_argument()
+    img = img_files[random.randint(0, (len(img_files) - 1))]
+
+    if argument != None:
         img = argument
-    else:
-        img = img_files[random.randint(0, (len(img_files)-1))]
 
     with open(f'images/{img}', 'rb') as pulish_img:
         bot.send_photo(chat_id=channel, photo=pulish_img)
