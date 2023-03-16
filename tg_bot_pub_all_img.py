@@ -24,8 +24,8 @@ def main():
     load_dotenv()
     img_files = [f for f in os.listdir('images')]
     tg_publish_time = os.getenv('TG_PUBLISH_TIME')
-    token = os.environ('TG_TOKEN')
-    channel = os.environ('TG_CHANNEL_LOGIN')
+    token = os.environ['TG_TOKEN']
+    channel = os.environ['TG_CHANNEL_LOGIN']
     bot = telegram.Bot(token=token)
     sec_in_hour = 3600
     publish_time = get_command_line_argument() * sec_in_hour
