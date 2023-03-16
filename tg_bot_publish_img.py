@@ -20,7 +20,7 @@ def get_command_line_argument():
 
 def main():
     load_dotenv()
-    img_files = [f for f in os.listdir('images')]
+    img_files = os.listdir('images')
 
     token = os.environ['TG_TOKEN']
     channel = os.environ['TG_CHANNEL_LOGIN']
