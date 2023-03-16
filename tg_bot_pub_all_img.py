@@ -34,7 +34,8 @@ def main():
 
     while True:
         for img in img_files:
-            bot.send_photo(chat_id=channel, photo=open(f'images/{img}', 'rb'))
+            with open(f'images/{img}', 'rb') as pulish_img:
+                bot.send_photo(chat_id=channel, photo=pulish_img)
             time.sleep(int(publish_time))
         random.shuffle(img_files)
 

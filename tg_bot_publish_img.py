@@ -31,7 +31,8 @@ def main():
     else:
         img = img_files[random.randint(0, (len(img_files)-1))]
 
-    bot.send_photo(chat_id=channel, photo=open(f'images/{img}', 'rb'))
+    with open(f'images/{img}', 'rb') as pulish_img:
+        bot.send_photo(chat_id=channel, photo=pulish_img)
 
 
 if __name__ == '__main__':
