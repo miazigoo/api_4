@@ -25,9 +25,9 @@ def main():
     token = os.environ['TG_TOKEN']
     channel = os.environ['TG_CHANNEL_LOGIN']
     bot = telegram.Bot(token=token)
-
-    if not get_command_line_argument() == None:
-        img = get_command_line_argument()
+    argument = get_command_line_argument
+    if not argument == None:
+        img = argument
     else:
         img = img_files[random.randint(0, (len(img_files)-1))]
 
