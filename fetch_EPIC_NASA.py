@@ -5,15 +5,6 @@ from dotenv import load_dotenv
 from download_img import download_img
 
 
-def fetch_nasa_picture_epic(img_name, img_url, nasa_api_key):
-    """Download the NASA EPIC image"""
-    nasa_api_params = {'api_key': nasa_api_key}
-    response = requests.get(img_url, params=nasa_api_params)
-    response.raise_for_status()
-    imgs_path = 'images'
-    download_img(response.url, img_name, imgs_path)
-
-
 def get_epic_url_and_fetch(nasa_api_key):
     """Get an NASA EPIC url and after download them"""
     api_epic_url = 'https://api.nasa.gov/EPIC/api/natural/images'
@@ -28,7 +19,11 @@ def get_epic_url_and_fetch(nasa_api_key):
         img_url = f'https://api.nasa.gov/EPIC/archive/natural/{img_date}/png/{img}.png'
         img_name = f'epic_{num}.png'
 
-        fetch_nasa_picture_epic(img_name, img_url, nasa_api_key)
+        img_response = requests.get(img_url, params=nasa_api_params)
+        img_response.raise_for_status()
+        imgs_path = 'images'
+        download_img(img_response.url, img_name, imgs_path)
+        print('success')
 
 
 def main():
