@@ -41,16 +41,16 @@ def fetch_nasa_pictures(count, nasa_api_key):
     }
     response = requests.get(nasa_api_url, params=nasa_api_params)
     response.raise_for_status()
-    json_object = response.json()
+    img_urls = response.json()
     imgs_path = 'images'
 
-    for num, pic_link in enumerate(json_object):
-        if not pic_link['url']:
-            continue
-        if get_filename_and_ext(pic_link['url'])[1] == '':
-            continue
+    for num, pic_link in enumerate(img_urls):
         img_url = pic_link['url']
         extension = get_filename_and_ext(img_url)[1]
+        if not img_url:
+            continue
+        if not extension:
+            continue
         img_name = f'nasa_apod_{num}{extension}'
         download_img(img_url, img_name, imgs_path)
 

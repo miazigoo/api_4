@@ -24,11 +24,11 @@ def fetch_spacex_last_launch(spacex_launch_id):
     spacex_api_url = f'https://api.spacexdata.com/v5/launches/{spacex_launch_id}'
     response = requests.get(spacex_api_url)
     response.raise_for_status()
-    api_object = response.json()
-    images_url = api_object["links"]['flickr']['original']
+    spacex_launch = response.json()
+    image_urls = spacex_launch["links"]['flickr']['original']
     imgs_path = 'images/SpaceX'
 
-    for num, img_url in enumerate(images_url):
+    for num, img_url in enumerate(image_urls):
         extension = get_filename_and_ext(img_url)[1]
         img_name = f'spacex_{num}{extension}'
         download_img(img_url, img_name, imgs_path)

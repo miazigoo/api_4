@@ -23,20 +23,18 @@ def get_command_line_argument():
 def main():
     load_dotenv()
     img_files = os.listdir('images')
-    tg_publish_time = os.getenv('TG_PUBLISH_TIME')
     token = os.environ['TG_TOKEN']
     channel = os.environ['TG_CHANNEL_LOGIN']
     bot = telegram.Bot(token=token)
     sec_in_hour = 3600
     publish_time = get_command_line_argument() * sec_in_hour
-    if tg_publish_time:
-        publish_time = float(tg_publish_time) * sec_in_hour
+    tg_publish_time = os.getenv('TG_PUBLISH_TIME', default=publish_time)
 
     while True:
         for img in img_files:
             with open(f'images/{img}', 'rb') as pulish_img:
                 bot.send_photo(chat_id=channel, photo=pulish_img)
-            time.sleep(int(publish_time))
+            time.sleep(int(tg_publish_time))
         random.shuffle(img_files)
 
 
