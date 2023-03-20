@@ -27,7 +27,7 @@ def fetch_nasa_picture_of_the_day(nasa_api_key):
     response = requests.get(nasa_api_url, params=api_key)
     response.raise_for_status()
     img_url = response.json()['url']
-    filename = get_filename_and_ext(img_url)[0]
+    filename, _ = get_filename_and_ext(img_url)
     imgs_path = 'images'
     download_img(img_url, filename, imgs_path)
 
@@ -46,7 +46,7 @@ def fetch_nasa_pictures(count, nasa_api_key):
 
     for num, pic_link in enumerate(img_urls):
         img_url = pic_link['url']
-        extension = get_filename_and_ext(img_url)[1]
+        _, extension = get_filename_and_ext(img_url)
         if not img_url:
             continue
         if not extension:

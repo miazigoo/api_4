@@ -14,10 +14,10 @@ def get_command_line_argument():
         Если не указан при запуске аргумент, публикация будет проходить раз в 4 часа.
         Аргумент принимает целые и дробные числа. Указанное число - это время в часах. 
         """)
-    parser.add_argument('hour', nargs='?', help='Укажите периодичность публикации: ', default=4)
+    parser.add_argument('hour', nargs='?', help='Укажите периодичность публикации: ', type=float)
     hour = parser.parse_args().hour
 
-    return float(hour)
+    return hour
 
 
 def main():
@@ -27,8 +27,10 @@ def main():
     channel = os.environ['TG_CHANNEL_LOGIN']
     bot = telegram.Bot(token=token)
     sec_in_hour = 3600
-    publish_time = get_command_line_argument() * sec_in_hour
-    tg_publish_time = os.getenv('TG_PUBLISH_TIME', default=publish_time)
+    command_line_argument = get_command_line_argument()
+    tg_publish_time = float(os.getenv('TG_PUBLISH_TIME', default=4)) * sec_in_hour
+    if command_line_argument:
+        tg_publish_time = command_line_argument * sec_in_hour
 
     while True:
         for img in img_files:

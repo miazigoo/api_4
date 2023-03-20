@@ -29,7 +29,7 @@ def fetch_spacex_last_launch(spacex_launch_id):
     imgs_path = 'images/SpaceX'
 
     for num, img_url in enumerate(image_urls):
-        extension = get_filename_and_ext(img_url)[1]
+        _, extension = get_filename_and_ext(img_url)
         img_name = f'spacex_{num}{extension}'
         download_img(img_url, img_name, imgs_path)
 
